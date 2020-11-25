@@ -31,6 +31,30 @@ SH R
 COPY R ST
 ```
 
+### ROTEAMENTO ENTRE VLAN
+```
+EN
+CONF T
+INT F0/0
+NO SH
+
+INT F0/0.5
+ENCAPSULATION DOT1Q 5
+IP AD 192.168.5.1 255.255.255.0
+DESC VLAN 5
+
+INT F0/0.10
+ENCAPSULATION DOT1Q 10
+IP AD 192.168.10.1 255.255.255.0
+DESC VLAN 10
+
+INT F0/0.20
+ENCAPSULATION DOT1Q 20
+IP AD 192.168.20.1 255.255.255.0
+DESC VLAN 20
+```
+obs: colocar a porta do SWTICH conectada no ROTEADOR no modo trunk.
+
 ## CONEXÃO REMOTA
 ### WAN
 ```
@@ -60,3 +84,43 @@ EXIT
 SH R
 COPY R ST
 ```
+
+### EIGRP
+```
+EN
+CONF T
+ROUTER EIGRP 1
+NO AUTO-SUMMARY
+NET 192.168.0.0
+NET 206.100.50.0
+EXIT
+EXIT
+SH R
+COPY R ST
+```
+
+### OSPF
+```
+EN
+CONF T
+ROUTER OSPF 100
+NET 192.168.0.0 0.0.0.255 AREA 0
+NET 206.100.50.0 0.0.0.255 AREA 0
+EXIT
+EXIT
+SH R
+COPY R ST
+```
+obs: a máscara colocada é a máscara coringa, ou seja, é subtração da máscara 255.255.255.255 menos a máscara do meu IP.
+
+### ESTÁTICO
+```
+EN
+CONF T
+IP ROUTE 172.16.0.0 255.255.255.0 SERIAL 0/0
+EXIT
+EXIT
+SH R
+COPY R ST
+```
+obs: o IP colocado no IP ROUTE é o meu IP de destino, ou seja, o IP da outra rede que quero fazer a comunicação. E também a porta colocada é a porta SERIAL do meu roteador que estou configurando.
