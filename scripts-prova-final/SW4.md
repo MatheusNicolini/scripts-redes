@@ -1,3 +1,4 @@
+```
 EN
 CONF T
 HOST SW4
@@ -13,3 +14,4 @@ EXIT
 SH VL
 WR
 RELOAD
+```

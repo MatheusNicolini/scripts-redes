@@ -1,3 +1,4 @@
+```
 EN
 CONF T
 HOST RT-STATIC
@@ -32,3 +33,4 @@ EXIT
 EXIT
 SH R
 COPY R ST
+```

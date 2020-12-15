@@ -1,4 +1,5 @@
 <!-- EIGRP 1 -->
+```
 EN
 CONF T
 HOST RT-REDISTRIBUTE
@@ -25,6 +26,7 @@ EXIT
 EXIT
 SH R
 COPY R ST
+```
 
 
 
